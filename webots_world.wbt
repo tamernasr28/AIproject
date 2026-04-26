@@ -1,0 +1,199 @@
+#VRML_SIM R2018a utf8
+WorldInfo {
+  basicTimeStep 32
+}
+
+Viewpoint {
+  orientation -0.7071068 0 0.7071068 1.5707963
+  position 5 2 5
+}
+
+Background {
+  skyColor [0.5 0.7 1]
+}
+
+Shape {
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.5 0.5 0.5
+    }
+  }
+  geometry Box {
+    size 10 0.1 10
+  }
+}
+
+# Walls
+Shape {
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.5 0.5 0.5
+    }
+  }
+  geometry Box {
+    size 10 2 0.1
+  }
+  translation 0 1 5
+}
+
+Shape {
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.5 0.5 0.5
+    }
+  }
+  geometry Box {
+    size 10 2 0.1
+  }
+  translation 0 1 -5
+}
+
+Shape {
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.5 0.5 0.5
+    }
+  }
+  geometry Box {
+    size 0.1 2 10
+  }
+  translation 5 1 0
+}
+
+Shape {
+  appearance Appearance {
+    material Material {
+      diffuseColor 0.5 0.5 0.5
+    }
+  }
+  geometry Box {
+    size 0.1 2 10
+  }
+  translation -5 1 0
+}
+
+# Robot
+DEF MyRobot Robot {
+  translation -3 0.04 -3
+  controller "robot_controller"
+  # Sensors
+  children [
+    DistanceSensor {
+      name "front"
+      enable TRUE
+    }
+    DistanceSensor {
+      name "front_left"
+      enable TRUE
+    }
+    DistanceSensor {
+      name "front_right"
+      enable TRUE
+    }
+    DistanceSensor {
+      name "left"
+      enable TRUE
+    }
+    DistanceSensor {
+      name "right"
+      enable TRUE
+    }
+    GPS {
+      enable TRUE
+    }
+  ]
+  # Motors
+  motor Motor {
+    name "left wheel motor"
+    stability FALSE
+  }
+  motor Motor {
+    name "right wheel motor"
+    stability FALSE
+  }
+}
+
+# Red Obstacles
+Transform {
+  translation -1.5 0.5 -1.5
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Box {
+        size 0.5 1 0.5
+      }
+    }
+  ]
+}
+
+Transform {
+  translation 1.5 0.5 -1.5
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Box {
+        size 0.5 1 0.5
+      }
+    }
+  ]
+}
+
+Transform {
+  translation 0 0.5 1.5
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Box {
+        size 0.5 1 0.5
+      }
+    }
+  ]
+}
+
+# Blue Start Marker
+Transform {
+  translation -3 0.5 -3
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+        }
+      }
+      geometry Cylinder {
+        height 0.1
+        radius 0.2
+      }
+    }
+  ]
+}
+
+# Green Goal Marker
+Transform {
+  translation 3 0.5 3
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+        }
+      }
+      geometry Cylinder {
+        height 0.1
+        radius 0.2
+      }
+    }
+  ]
+}
